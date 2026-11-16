@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BreathCue } from "@/components/BreathCue";
 import { Cross } from "@/components/Cross";
+import { FaceHero } from "@/components/FaceHero";
 import { Filmstrip } from "@/components/Filmstrip";
 import { JsonLd } from "@/components/JsonLd";
 import { LogoRow } from "@/components/Logos";
-import { NewsletterButton } from "@/components/Newsletter";
 import { Photo } from "@/components/Photo";
 import { Voices } from "@/components/Voices";
 import { photos } from "@/content/images";
@@ -40,35 +39,9 @@ const homeVoices = voices.filter((v) =>
 );
 
 export default function Home() {
-  const hero = photos.monstera;
   return (
     <>
-      <section className="face-hero">
-        <div className="face-hero__photo">
-          <Image src={hero.src} alt={hero.alt} fill priority sizes="(max-width: 900px) 100vw, 58vw" style={{ objectPosition: "74% 30%" }} />
-        </div>
-        <div className="wrap face-hero__text">
-          <div>
-            <h1 className="display display--xl">
-              <span className="face-hero__name">Biet Simkin</span>
-              <span className="face-hero__line">An ongoing</span>
-              <span className="face-hero__line display--italic">installation.</span>
-            </h1>
-            <p className="lede">Spiritual teacher, best-selling author and artist. Called the David Bowie of meditation.</p>
-            <div className="actions">
-              <Link href="/membership" className="btn" data-event="cta_click" data-label="Home hero, Enter">
-                Enter
-              </Link>
-              <NewsletterButton className="link" source="home-hero">
-                Join my newsletter
-              </NewsletterButton>
-            </div>
-            <div className="face-hero__cue">
-              <BreathCue />
-            </div>
-          </div>
-        </div>
-      </section>
+      <FaceHero />
 
       <section className="room room--tight" aria-labelledby="featured">
         <div className="wrap split split--center">

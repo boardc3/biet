@@ -1962,12 +1962,41 @@ a.door:hover .door__title {
 }
 .face-hero__photo img {
   object-fit: cover;
+  object-position: 50% 12%;
+}
+/* Her portraits dissolve one into the next; her face stays where it is. */
+.face-hero__face {
+  opacity: 0;
+  transition: opacity 1.8s var(--ease), transform 7s linear;
+  transform: scale(1.04);
+}
+.face-hero__face.is-on {
+  opacity: 1;
+  transform: scale(1);
+}
+/* The headline's two lines change on the same beat. */
+.face-hero__lines {
+  display: grid;
+}
+.face-hero__pair {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(0.12em);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.face-hero__pair.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1.1s var(--ease) 0.6s, transform 1.4s var(--ease) 0.6s;
+}
+.face-hero__photo {
+  overflow: hidden;
 }
 .face-hero__photo::after {
   content: "";
   position: absolute;
   inset: auto 0 0 0;
-  height: 34%;
+  height: 46%;
   background: linear-gradient(180deg, rgba(246, 241, 237, 0), var(--shell));
 }
 .face-hero__text {
@@ -2015,6 +2044,15 @@ a.door:hover .door__title {
     height: auto;
     background: linear-gradient(90deg, var(--shell) 0%, rgba(246, 241, 237, 0.82) 30%, rgba(246, 241, 237, 0) 100%);
   }
+  /* The frame dissolves into the page below her collarbone, so the eye stays on her face. */
+  .face-hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 30%;
+    background: linear-gradient(180deg, rgba(246, 241, 237, 0), rgba(246, 241, 237, 0.86) 62%, var(--shell));
+    pointer-events: none;
+  }
   .face-hero__photo::before {
     content: "";
     position: absolute;
@@ -2033,8 +2071,7 @@ a.door:hover .door__title {
   }
   /* Zoom past the frame's lower third so the crop is her face, hat and raised hand. */
   .face-hero__photo img {
-    height: 128% !important;
-    object-position: 86% 0 !important;
+    object-position: 50% 10%;
   }
 }
 .js .face-hero__text > div > * {
@@ -2049,7 +2086,7 @@ a.door:hover .door__title {
 .js .face-hero__text > div > *:nth-child(4) {
   animation-delay: 0.65s;
 }
-.js .face-hero__photo img {
+.js .face-hero__photo {
   animation: unveil 2.6s var(--ease) both;
 }
 @keyframes unveil {
