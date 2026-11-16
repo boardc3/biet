@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Join the newsletter</title>
+<!--
+  This frame hosts Biet's existing Kajabi newsletter form (form 2148833253),
+  so every signup lands in the same list as before. Only the styling is ours.
+  The form posts straight to Kajabi and then shows Kajabi's own confirmation.
+-->
+<base target="_top">
+<style>
+  @font-face { font-family: "Jost"; src: url("/fonts/Jost.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  :root { --ink: #2A1823; --line: rgba(42, 24, 35, .28); --muted: #6E5A66; --field: rgba(255, 255, 255, .5); --btn: #2A1823; --btn-ink: #F6F1ED; --btn-hover: #A8415F; }
+  html[data-theme="dusk"] { --ink: #F6F1ED; --line: rgba(246, 241, 237, .34); --muted: #CDBFC6; --field: rgba(246, 241, 237, .06); --btn: #F6F1ED; --btn-ink: #2A1823; --btn-hover: #E9C9CF; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: transparent; color: var(--ink); font-family: "Jost", "Futura", "Century Gothic", system-ui, sans-serif; font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  body { padding: 2px; }
+
+  /* Kajabi ships its own colours and spacing; these rules replace them. */
+  .kajabi-form--inline, .kajabi-form--inline form, .kajabi-form__content { all: unset; display: block !important; background: transparent !important; color: var(--ink) !important; padding: 0 !important; margin: 0 !important; max-width: none !important; width: 100% !important; text-align: left !important; font-family: inherit !important; }
+  .kajabi-form__title, .kajabi-form__subtitle { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; }
+  fieldset { border: 0 !important; padding: 0 !important; margin: 0 !important; min-width: 0 !important; display: grid !important; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: stretch; }
+  .kajabi-form__form-item { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+  input[type="text"], input[type="email"] {
+    appearance: none; width: 100% !important; height: 56px !important; margin: 0 !important; padding: 0 20px !important;
+    font: inherit !important; font-size: 17px !important; color: var(--ink) !important; background: var(--field) !important;
+    border: 1px solid var(--line) !important; border-radius: 999px !important; box-shadow: none !important; outline: none; transition: border-color .3s ease, background-color .3s ease;
+  }
+  input::placeholder { color: var(--muted) !important; opacity: 1; }
+  input[type="text"]:focus-visible, input[type="email"]:focus-visible { border-color: var(--ink) !important; outline: 2px solid var(--ink); outline-offset: 2px; }
+  .kajabi-form__btn {
+    appearance: none; cursor: pointer; height: 56px !important; margin: 0 !important; padding: 0 30px !important; width: auto !important;
+    font: inherit !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: .01em !important; text-transform: none !important;
+    color: var(--btn-ink) !important; background: var(--btn) !important; border: 0 !important; border-radius: 999px !important; box-shadow: none !important; transition: background-color .4s ease;
+    white-space: nowrap;
+  }
+  .kajabi-form__btn:hover { background: var(--btn-hover) !important; }
+  .kajabi-form__btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .kajabi-form__btn[disabled] { opacity: .6; cursor: progress; }
+  .parsley-errors-list { list-style: none; margin: 6px 0 0 20px; padding: 0; font-size: 14px; color: var(--btn-hover); }
+  .fallback { margin: 0; color: var(--muted); font-size: 16px; }
+  .fallback a { color: inherit; }
+  html[data-layout="stack"] fieldset { grid-template-columns: 1fr; }
+  html[data-layout="stack"] .kajabi-form__btn { width: 100% !important; }
+  @media (max-width: 560px) { fieldset { grid-template-columns: 1fr; } .kajabi-form__btn { width: 100% !important; } }
+</style>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    document.documentElement.setAttribute("data-theme", q.get("theme") === "dusk" ? "dusk" : "light");
+    if (q.get("layout") === "stack") document.documentElement.setAttribute("data-layout", "stack");
+  })();
+</script>
+</head>
+<body>
+<script src="https://guided-by-biet.mykajabi.com/forms/2148833253/embed.js"></script>
+<noscript><p class="fallback">To join the newsletter, email <a href="mailto:biet.name@gmail.com?subject=Newsletter">biet.name@gmail.com</a>.</p></noscript>
+<script>
+  (function () {
+    var form = document.querySelector("form");
+    if (!form) {
+      var p = document.createElement("p");
+      p.className = "fallback";
+      p.innerHTML = 'The signup form could not load. Email <a href="mailto:biet.name@gmail.com?subject=Newsletter">biet.name@gmail.com</a> and we will add you.';
+      document.body.appendChild(p);
+    } else {
+      form.setAttribute("target", "_top");
+      var button = form.querySelector("button");
+      if (button) button.textContent = "Subscribe";
+      var name = form.querySelector('input[type="text"]');
+      var email = form.querySelector('input[type="email"]');
+      if (name) { name.setAttribute("aria-label", "Name"); name.setAttribute("autocomplete", "name"); }
+      if (email) { email.setAttribute("aria-label", "Email"); email.setAttribute("autocomplete", "email"); }
+      form.addEventListener("submit", function () {
+        try { parent.postMessage({ type: "biet-newsletter-submit" }, location.origin); } catch (e) {}
+      });
+    }
+    function report() {
+      try { parent.postMessage({ type: "biet-newsletter-height", height: Math.ceil(document.documentElement.getBoundingClientRect().height) }, location.origin); } catch (e) {}
+    }
+    if ("ResizeObserver" in window) new ResizeObserver(report).observe(document.body);
+    window.addEventListener("load", report);
+    report();
+  })();
+</script>
+</body>
+</html>
