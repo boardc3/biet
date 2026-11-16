@@ -40,6 +40,11 @@
   .kajabi-form__btn:hover { background: var(--btn-hover) !important; }
   .kajabi-form__btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
   .kajabi-form__btn[disabled] { opacity: .6; cursor: progress; }
+  /* Kajabi sets its own button colours on #kajabi-form with !important, so these go one step more specific. */
+  html #kajabi-form .kajabi-form__btn, html body .kajabi-form--inline .kajabi-form__btn { color: var(--btn-ink) !important; background-color: var(--btn) !important; }
+  html #kajabi-form .kajabi-form__btn:not(.kajabi-form__btn--disabled):hover, html body .kajabi-form--inline .kajabi-form__btn:hover { color: var(--btn-ink) !important; background-color: var(--btn-hover) !important; }
+  html #kajabi-form, html #kajabi-form .kajabi-form__content, html #kajabi-form .kajabi-form__form-item label { color: var(--ink) !important; background-color: transparent !important; }
+  html[data-theme="dusk"] { --btn-hover: #ECD3D7; }
   .parsley-errors-list { list-style: none; margin: 6px 0 0 20px; padding: 0; font-size: 14px; color: var(--btn-hover); }
   .fallback { margin: 0; color: var(--muted); font-size: 16px; }
   .fallback a { color: inherit; }
