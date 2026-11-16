@@ -14,6 +14,16 @@ export function isIndexable(): boolean {
   return process.env.VERCEL_ENV === "production" && prodHost.endsWith("bietsimkin.com");
 }
 
+/**
+ * Where share images and og:url point. Until bietsimkin.com is moved to this
+ * project, that is the Vercel address, so link previews work from day one.
+ */
+export function shareBase(): string {
+  const host = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (host && !host.endsWith("bietsimkin.com")) return `https://${host}`;
+  return site.url;
+}
+
 type PageSeo = {
   title: string;
   description: string;
@@ -25,7 +35,8 @@ type PageSeo = {
 
 export function pageMetadata({ title, description, path, shareLine, noindex }: PageSeo): Metadata {
   const url = path === "/" ? site.url : `${site.url}${path}`;
-  const og = `/og?line=${encodeURIComponent(shareLine ?? title)}`;
+  const shareUrl = path === "/" ? shareBase() : `${shareBase()}${path}`;
+  const og = `${shareBase()}/og?line=${encodeURIComponent(shareLine ?? title)}`;
   const fullTitle = path === "/" ? title : `${title} | ${site.name}`;
   return {
     title: path === "/" ? { absolute: title } : title,
@@ -34,7 +45,7 @@ export function pageMetadata({ title, description, path, shareLine, noindex }: P
     robots: noindex || !isIndexable() ? { index: false, follow: !noindex } : { index: true, follow: true },
     openGraph: {
       type: "website",
-      url,
+      url: shareUrl,
       siteName: site.name,
       title: fullTitle,
       description,
