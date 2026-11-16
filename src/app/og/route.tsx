@@ -5,45 +5,65 @@ import path from "node:path";
 export const runtime = "nodejs";
 
 /**
- * Share image for every page: the page's line set in Bodoni over the dawn
- * light. Pages request it as /og?line=Their%20line.
+ * Share image for every page: Biet's portrait beside the page's line, set in
+ * Bodoni. This is what iMessage, WhatsApp, LinkedIn, X and Facebook show. Pages request it as /og?line=Their%20line.
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const line = (searchParams.get("line") ?? "An ongoing installation.").slice(0, 80);
   const font = await readFile(path.join(process.cwd(), "src/fonts/og/BodoniModa-Regular.woff"));
   const sans = await readFile(path.join(process.cwd(), "src/fonts/og/Jost-Regular.woff"));
+  const portrait = await readFile(path.join(process.cwd(), "src/fonts/og/portrait.jpg"));
+  const portraitSrc = `data:image/jpeg;base64,${portrait.toString("base64")}`;
 
   const rings = [
-    { inset: 0, bg: "linear-gradient(180deg, #efe7ee, #f2e2e2 55%, #f5e8de)" },
-    { inset: 46, bg: "linear-gradient(180deg, #e4d9ec, #f0d2d8 55%, #f7dfcd)" },
-    { inset: 92, bg: "linear-gradient(180deg, #d3c5e6, #ecb9c6 55%, #f8d0b4)" },
-    { inset: 138, bg: "linear-gradient(180deg, #bfaedd, #e597ae 52%, #f8c3a0)" },
-    { inset: 184, bg: "linear-gradient(180deg, #fde6cf, #fff8ee 55%, #f4bcb2)" },
+    { inset: 0, bg: "#efe7ee" },
+    { inset: 30, bg: "#e8d8e8" },
+    { inset: 60, bg: "#e2c4de" },
+    { inset: 90, bg: "#ecb9c6" },
   ];
 
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", background: "#f6f1ed", color: "#2a1823", position: "relative" }}>
-        <div style={{ position: "absolute", right: 70, top: 20, width: 472, height: 590, display: "flex" }}>
+        <div style={{ position: "absolute", right: 40, top: -30, width: 560, height: 690, display: "flex" }}>
           {rings.map((r) => (
             <div
               key={r.inset}
               style={{
                 position: "absolute",
-                left: r.inset * 0.8,
-                right: r.inset * 0.8,
+                left: r.inset,
+                right: r.inset,
                 top: r.inset,
                 bottom: r.inset,
                 borderRadius: "50%",
-                backgroundImage: r.bg,
+                background: r.bg,
               }}
             />
           ))}
         </div>
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "64px 72px", width: 760 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={portraitSrc}
+          alt=""
+          width={380}
+          height={475}
+          style={{
+            position: "absolute",
+            right: 130,
+            top: 78,
+            width: 380,
+            height: 475,
+            objectFit: "cover",
+            borderTopLeftRadius: 190,
+            borderTopRightRadius: 190,
+            borderBottomLeftRadius: 24,
+            borderBottomRightRadius: 24,
+          }}
+        />
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "64px 72px", width: 660 }}>
           <div style={{ display: "flex", fontFamily: "Jost", fontSize: 30 }}>Biet Simkin</div>
-          <div style={{ display: "flex", fontFamily: "Bodoni Moda", fontSize: line.length > 34 ? 68 : 88, lineHeight: 1.04, letterSpacing: -1.5 }}>
+          <div style={{ display: "flex", fontFamily: "Bodoni Moda", fontSize: line.length > 30 ? 58 : line.length > 18 ? 72 : 88, lineHeight: 1.04, letterSpacing: -1.5 }}>
             {line}
           </div>
           <div style={{ display: "flex", fontFamily: "Jost", fontSize: 24, color: "#6e5a66" }}>
