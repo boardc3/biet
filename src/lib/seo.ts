@@ -51,6 +51,17 @@ export function pageMetadata({ title, description, path, shareLine, noindex }: P
       description,
       locale: "en_US",
       images: [{ url: og, width: 1200, height: 630, alt: `${site.name}. ${shareLine ?? title}` }],
+      // Messages on iPhone and Mac plays this inline in the link preview, muted and looping.
+      // Apple caps icon + image + video at 10 MB in total, so this cut is kept small.
+      videos: [
+        {
+          url: `${shareBase()}/share/biet-simkin-preview.mp4`,
+          secureUrl: `${shareBase()}/share/biet-simkin-preview.mp4`,
+          type: "video/mp4",
+          width: 720,
+          height: 720,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
