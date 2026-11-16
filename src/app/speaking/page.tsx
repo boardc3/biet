@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
-import { Plate } from "@/components/Plate";
+import { Photo } from "@/components/Photo";
 import { Quotes } from "@/components/Quotes";
 import { Video } from "@/components/Video";
 import { site, voices } from "@/content/site";
@@ -28,6 +28,8 @@ export default function Speaking() {
           </>
         }
         lede="A recognized public speaker and author, with the power to inspire and impact lives."
+        image="onStage"
+        imageFocus="60% 40%"
       >
         <a className="btn" href={`mailto:${site.email}?subject=Speaking%20inquiry`} data-event="cta_click" data-label="Speaking, inquire">
           Invite Biet to speak
@@ -36,8 +38,13 @@ export default function Speaking() {
 
       <section className="room room--flush-top" aria-label="Speaking reel">
         <div className="wrap stack stack--l">
-          <Video provider="vimeo" id="322689467" title="Biet Simkin, speaking" caption="Play the reel, 2 minutes" />
-          <Plate slot="speaking-stage" alt="Biet Simkin leading a room in meditation" ratio="16 / 9" sizes="90vw" />
+          <Video provider="vimeo" id="322689467" title="Biet Simkin, speaking" caption="Play the reel, 2 minutes" poster="armsRaised" />
+          <div className="mosaic">
+            <Photo name="moma" ratio="3 / 2" className="mosaic__wide" sizes="(max-width: 830px) 92vw, 60vw" caption="Guided by Biet at MoMA" />
+            <Photo name="planetarium" ratio="3 / 4" sizes="(max-width: 830px) 46vw, 30vw" />
+            <Photo name="tent" ratio="3 / 4" sizes="(max-width: 830px) 46vw, 30vw" />
+            <Photo name="whiteDress" ratio="3 / 2" className="mosaic__wide" sizes="(max-width: 830px) 92vw, 60vw" />
+          </div>
         </div>
       </section>
 

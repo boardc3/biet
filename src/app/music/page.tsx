@@ -1,6 +1,8 @@
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
-import { Plate, hasPlate } from "@/components/Plate";
+import Image from "next/image";
+import { Photo } from "@/components/Photo";
+import { photos } from "@/content/images";
 import { Video } from "@/components/Video";
 import { site } from "@/content/site";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
@@ -15,9 +17,9 @@ export const metadata = pageMetadata({
 
 const spotify = "https://open.spotify.com/album/2uP7Hfa8gIdbtZyl1tLUcu";
 const kids = [
-  ["Connecting to your Unicorn", "https://welcomeearth.tv/kids/connecting-to-your-unicorn-biet-simkin/"],
-  ["Eye Gazing Meditation", "https://welcomeearth.tv/kids/eye-gazing-meditation-biet-simkin/"],
-  ["Bumblebee Breath Meditation", "https://welcomeearth.tv/kids/bumblebee-breath-meditation-biet-simkin/"],
+  ["Connecting to your Unicorn", "https://welcomeearth.tv/kids/connecting-to-your-unicorn-biet-simkin/", "kidsUnicorn"],
+  ["Eye Gazing Meditation", "https://welcomeearth.tv/kids/eye-gazing-meditation-biet-simkin/", "kidsEyeGazing"],
+  ["Bumblebee Breath Meditation", "https://welcomeearth.tv/kids/bumblebee-breath-meditation-biet-simkin/", "kidsBumblebee"],
 ] as const;
 
 export default function Music() {
@@ -35,14 +37,7 @@ export default function Music() {
       <section className="room room--flush-top" aria-labelledby="album">
         <div className="wrap split split--even split--center">
           <div data-reveal>
-            {hasPlate("album-cover") ? (
-              <Plate slot="album-cover" alt="Cover of Biet Simkin’s new album" ratio="1" />
-            ) : (
-              <div className="book book--square" aria-hidden="true">
-                <span className="book__meta">Biet Simkin</span>
-                <span className="book__title">New album</span>
-              </div>
-            )}
+            <Photo name="album" ratio="1" reveal={false} priority sizes="(max-width: 900px) 92vw, 40vw" />
           </div>
           <div className="stack stack--l">
             <h2 id="album" className="display display--l" data-reveal>New album out now</h2>
@@ -69,8 +64,9 @@ export default function Music() {
                 Begin the meditation
               </a>
             </div>
-            {kids.map(([name, url]) => (
-              <div key={url} className="listing__item" data-reveal>
+            {kids.map(([name, url, art]) => (
+              <div key={url} className="listing__item listing__item--thumb" data-reveal>
+                <Image className="kid-thumb" src={photos[art].src} alt={photos[art].alt} width={500} height={500} sizes="88px" />
                 <div>
                   <h3 className="listing__title">{name}</h3>
                   <p className="listing__text">A free meditation for kids.</p>
@@ -92,6 +88,7 @@ export default function Music() {
             id="htm-Oz3q4FY"
             title="A guided meditation at 1 Hotel Brooklyn Bridge"
             caption="Play the meditation, filmed by 1 Hotels"
+            poster="monstera"
           />
         </div>
       </section>
@@ -108,9 +105,9 @@ export default function Music() {
                 Get The Lunar on iTunes
               </a>
             </div>
-            <Plate slot="lunar-cover" alt="Biet Simkin, The Lunar" shape="arch" />
+            <Photo name="silverDress" shape="arch" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 40vw" />
           </div>
-          <Video provider="youtube" id="FIpkfekSFmo" title="Second Interval" caption="Play the track on YouTube" />
+          <Video provider="youtube" id="FIpkfekSFmo" title="Second Interval" caption="Play the track on YouTube" poster="desertDusk" />
         </div>
       </section>
 

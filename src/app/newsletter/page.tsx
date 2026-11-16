@@ -1,7 +1,7 @@
 import { JsonLd } from "@/components/JsonLd";
 import { NewsletterForm } from "@/components/Newsletter";
 import { PageHero } from "@/components/PageHero";
-import { Plate } from "@/components/Plate";
+import { Photo } from "@/components/Photo";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -28,7 +28,7 @@ export default function Newsletter() {
           <div style={{ maxWidth: "44rem" }}>
             <NewsletterForm title="Join the newsletter" />
           </div>
-          <Plate slot="newsletter-portrait" alt="Biet Simkin" shape="arch" />
+          <Photo name="leatherSofa" shape="arch" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 40vw" />
         </div>
       </section>
       <JsonLd data={breadcrumbs([{ name: "Newsletter", path: "/newsletter" }])} />

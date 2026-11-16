@@ -1,29 +1,14 @@
-# Photography slots
+# Photography
 
-The site is designed to look complete with no photographs at all. To add
-Biet's photography, export each image from her originals (not the compressed
-Wix copies), name it as below, and put it in this folder. Use `.jpg`, `.webp`
-or `.avif`, around 2000px on the long edge. Commit and push; Vercel redeploys
-and each slot fills itself in.
+Web-sized copies of Biet's photographs and the press and partner logos. The
+untouched originals stay in `/asset-library` at the project root, which is not
+committed or deployed.
 
-| File name | Where it appears | Old site file it replaces |
-| --- | --- | --- |
-| `home-portrait` | Home, inside the light aperture | `200207_bietbrandon_img_6080_insta.JPG` (home slideshow) |
-| `about-portrait` | About, main portrait | `unnamed-6.jpg` |
-| `about-second` | About, beside the story | any editorial portrait |
-| `work-portrait` | Work with Biet | `unnamed-2.jpg` |
-| `speaking-stage` | Speaking | stage or room photograph |
-| `source-portrait` | The Source | `biet.png` |
-| `source-circle` | The Source | gathering photograph |
-| `membership-body` | Membership, The Body | first chamber image |
-| `membership-state` | Membership, The State | second chamber image |
-| `membership-observer` | Membership, The Observer | third chamber image |
-| `membership-installation` | Membership, The Installation | fourth chamber image |
-| `library-portrait` | Breathwork Library | `print Biet_Simkin.jpg` |
-| `book-cover` | Shop, Don't Just Sit There! | `67681_spineout.png` |
-| `deck-cover` | Shop, breathwork card deck | `71WBunIEHdL._SL1500_.jpg` |
-| `album-cover` | Meditation & music, new album | `biet_lp_color3000` |
-| `lunar-cover` | Meditation & music, The Lunar | `music-silverdress.jpg` |
-| `newsletter-portrait` | Newsletter invitation | newsletter popup image |
+Each file is listed in `src/content/images.ts` with its alt text and a `focus`
+point (where her face sits), which keeps crops from cutting her off. To swap a
+photograph, replace the file here with the same name, or add a new entry there
+and use it with `<Photo name="…" />`.
 
-Alt text for every slot lives next to where it is used in `src/app`.
+Not used on the site, on purpose: the testimonial headshots (third-party press
+and broadcast images), the two candid photos marked "review before use", the
+stock canapés photo, and the two homework book covers.

@@ -1,7 +1,9 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { photos } from "@/content/images";
 import { track } from "./track";
 
 type Ctx = { open: (source: string) => void };
@@ -114,12 +116,16 @@ export function NewsletterProvider({ children }: { children: ReactNode }) {
 
       <dialog
         ref={dialog}
-        className="dialog newsletter-dialog"
+        className="dialog newsletter-dialog newsletter-dialog--photo"
         aria-labelledby="newsletter-dialog-title"
         onClick={(e) => {
           if (e.target === dialog.current) dialog.current?.close();
         }}
       >
+        <div className="newsletter-dialog__split">
+          <div className="newsletter-dialog__image">
+            <Image src={photos.leatherSofa.src} alt={photos.leatherSofa.alt} fill sizes="22rem" style={{ objectPosition: photos.leatherSofa.focus }} />
+          </div>
         <div className="newsletter-dialog__panel">
           <form method="dialog">
             <button className="dialog__close" aria-label="Close">
@@ -132,6 +138,7 @@ export function NewsletterProvider({ children }: { children: ReactNode }) {
             Stay informed on all Guided by Biet events, courses, art and music. We promise we won’t bug ya.
           </p>
           {mounted ? <NewsletterForm layout="stack" /> : null}
+        </div>
         </div>
       </dialog>
 

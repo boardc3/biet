@@ -22,6 +22,7 @@ export default function Courses() {
           </>
         }
         lede="Coming soon!"
+        image="yogaMat"
       >
         <NewsletterButton source="courses">Tell me when courses open</NewsletterButton>
         <Link className="link" href="/membership">Start with the membership</Link>

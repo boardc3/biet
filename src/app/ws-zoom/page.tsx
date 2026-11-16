@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 export default function WifestyleZoom() {
   return (
     <>
-      <PageHero title={<span className="display--italic">Wifestyle.</span>} lede="Join our group call here.">
+      <PageHero title={<span className="display--italic">Wifestyle.</span>} lede="Join our group call here." image="floorPlants">
         <a className="btn" href="https://us02web.zoom.us/j/82468351910" target="_blank" rel="noopener noreferrer" data-event="cta_click" data-label="Wifestyle, Zoom">
           Open the Zoom link
         </a>

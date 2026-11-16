@@ -1,12 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Aperture } from "@/components/Aperture";
 import { BreathCue } from "@/components/BreathCue";
 import { Cross } from "@/components/Cross";
+import { Filmstrip } from "@/components/Filmstrip";
 import { JsonLd } from "@/components/JsonLd";
+import { LogoRow } from "@/components/Logos";
 import { NewsletterButton } from "@/components/Newsletter";
+import { Photo } from "@/components/Photo";
 import { Voices } from "@/components/Voices";
-import { featuredIn, site, voices } from "@/content/site";
-import { media } from "@/lib/media";
+import { photos } from "@/content/images";
+import { site, voices } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -32,25 +35,26 @@ const epithets: Array<{ words: string; source?: string; url?: string }> = [
   { words: "“The meditation guru for the next generation.”" },
 ];
 
-const homeVoices = voices.filter((v) => ["Sophia Bush", "Marianne Williamson", "Stacy London", "Miki Agrawal", "Benmont Tench", "Light Watkins"].includes(v.name));
+const homeVoices = voices.filter((v) =>
+  ["Sophia Bush", "Marianne Williamson", "Stacy London", "Miki Agrawal", "Benmont Tench", "Light Watkins"].includes(v.name),
+);
 
 export default function Home() {
+  const hero = photos.monstera;
   return (
     <>
-      <section className="home-hero">
-        <div className="wrap home-hero__grid">
-          <div className="home-hero__light">
-            <Aperture image={media("home-portrait")} alt="Biet Simkin" />
-          </div>
-          <div className="home-hero__text">
+      <section className="face-hero">
+        <div className="face-hero__photo">
+          <Image src={hero.src} alt={hero.alt} fill priority sizes="(max-width: 900px) 100vw, 58vw" style={{ objectPosition: "74% 30%" }} />
+        </div>
+        <div className="wrap face-hero__text">
+          <div>
             <h1 className="display display--xl">
-              <span className="home-hero__name">Biet Simkin</span>
-              <span className="home-hero__line">An ongoing</span>
-              <span className="home-hero__line display--italic">installation.</span>
+              <span className="face-hero__name">Biet Simkin</span>
+              <span className="face-hero__line">An ongoing</span>
+              <span className="face-hero__line display--italic">installation.</span>
             </h1>
-            <p className="lede">
-              Spiritual teacher, best-selling author and artist. Called the David Bowie of meditation.
-            </p>
+            <p className="lede">Spiritual teacher, best-selling author and artist. Called the David Bowie of meditation.</p>
             <div className="actions">
               <Link href="/membership" className="btn" data-event="cta_click" data-label="Home hero, Enter">
                 Enter
@@ -59,17 +63,25 @@ export default function Home() {
                 Join my newsletter
               </NewsletterButton>
             </div>
-            <div className="home-hero__cue">
+            <div className="face-hero__cue">
               <BreathCue />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="room" aria-labelledby="intro">
-        <div className="wrap split">
-          <h2 id="intro" className="kicker">Who she is</h2>
+      <section className="room room--tight" aria-labelledby="featured">
+        <div className="wrap split split--center">
+          <h2 id="featured" className="kicker">Featured in</h2>
+          <LogoRow names={["TIME", "Forbes", "ELLE", "Harper’s Bazaar", "Glamour", "The Times"]} label="Press" />
+        </div>
+      </section>
+
+      <section className="room room--flush-top" aria-labelledby="intro">
+        <div className="wrap split split--even split--center">
+          <Photo name="knitSweater" shape="arch" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 45vw" />
           <div className="stack stack--l">
+            <h2 id="intro" className="kicker">Who she is</h2>
             <p className="statement statement--wide" data-reveal>
               Raised by a shaman in New York City and signed to Sony Records at nineteen, Biet weaves pop culture and
               spirituality, teaching practical applications of ancient spiritual wisdom.
@@ -88,9 +100,9 @@ export default function Home() {
       </section>
 
       <section className="room room--mist" aria-labelledby="called">
-        <div className="wrap split">
-          <h2 id="called" className="kicker">What they call her</h2>
+        <div className="wrap split split--wide-left split--center">
           <div className="stack stack--xl">
+            <h2 id="called" className="kicker">What they call her</h2>
             <ul className="epithets">
               {epithets.map((e) => (
                 <li key={e.words} className="epithet" data-reveal>
@@ -107,12 +119,17 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <div className="stack" data-reveal>
-              <p className="note">Featured in {featuredIn.join(", ")}.</p>
-              <Link href="/press" className="link">See all press</Link>
-            </div>
+            <Link href="/press" className="link">See all press</Link>
           </div>
+          <Photo name="redBackdrop" ratio="3 / 4" sizes="(max-width: 900px) 92vw, 38vw" />
         </div>
+      </section>
+
+      <section className="room room--flush-top room--mist" aria-label="Biet, in frames" style={{ paddingTop: 0 }}>
+        <Filmstrip
+          label="Photographs of Biet Simkin"
+          names={["marbleWall", "armsOpen", "cube", "leatherSofa", "silverDress", "floorPlants", "airPlant", "yogaMat"]}
+        />
       </section>
 
       <section className="room" aria-labelledby="cross">
@@ -140,13 +157,12 @@ export default function Home() {
 
       <section className="room room--dusk" aria-labelledby="ways">
         <div className="wrap stack stack--xl">
-          <div className="stack">
-            <h2 id="ways" className="display display--l" data-reveal>
-              There are only three ways to experience Biet’s work.
-            </h2>
-          </div>
+          <h2 id="ways" className="display display--l" data-reveal>
+            There are only three ways to experience Biet’s work.
+          </h2>
           <div className="doors" data-reveal>
             <Link href="/the-source" className="door" data-event="cta_click" data-label="Home, door, The Source">
+              <Photo name="military" ratio="4 / 5" className="door__photo" reveal={false} sizes="(max-width: 900px) 92vw, 30vw" />
               <h3 className="door__title">Inside The Source</h3>
               <p className="door__text">
                 A space where visionaries, creators and leaders gather weekly to do the inner work that success alone
@@ -155,6 +171,7 @@ export default function Home() {
               <span className="link door__go">Explore The Source</span>
             </Link>
             <Link href="/work-with-biet" className="door" data-event="cta_click" data-label="Home, door, Private">
+              <Photo name="onStage" ratio="4 / 5" className="door__photo" reveal={false} sizes="(max-width: 900px) 92vw, 30vw" />
               <h3 className="door__title">By private commission</h3>
               <p className="door__text">
                 Private spiritual teaching, speaking, and wellness programming for hotels and brands. Typically in the
@@ -163,6 +180,7 @@ export default function Home() {
               <span className="link door__go">Work with Biet</span>
             </Link>
             <Link href="/membership" className="door" data-event="cta_click" data-label="Home, door, Membership">
+              <Photo name="eyesClosed" ratio="4 / 5" className="door__photo" reveal={false} sizes="(max-width: 900px) 92vw, 30vw" />
               <h3 className="door__title">Or here</h3>
               <p className="door__text">
                 The membership. Her recorded breathwork and somatic method, delivered exactly as she practices it. $111
@@ -181,42 +199,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="room" aria-labelledby="membership">
-        <div className="wrap split split--even split--center">
-          <div className="stack stack--l">
-            <h2 id="membership" className="display display--l" data-reveal>
-              You don’t need motivation. <span className="display--italic">You need recalibration.</span>
-            </h2>
-            <p className="lede" data-reveal>
-              The daily system that built this brand and this being. For people who want more without burning out or
-              losing themselves in the process.
-            </p>
-            <div className="actions" data-reveal>
-              <Link href="/membership" className="btn" data-event="cta_click" data-label="Home, Membership">
-                See the membership
-              </Link>
-              <Link href="/breathwork-membership" className="link">What’s in the library</Link>
-            </div>
-          </div>
-          <div className="verse" data-reveal>
-            <p>Body. Sound. Attention.</p>
-            <p>
-              Four chambers.
-              <br />
-              Used together.
-              <br />
-              Used daily.
-            </p>
-            <p>
-              Not coaching.
-              <br />
-              Not therapy.
-              <br />
-              Not hype.
-            </p>
-            <p>
-              <em>Calibration.</em>
-            </p>
+      <section className="banner" aria-labelledby="membership">
+        <div className="banner__photo">
+          <Image src={photos.desertDusk.src} alt={photos.desertDusk.alt} fill sizes="100vw" style={{ objectPosition: photos.desertDusk.focus }} />
+        </div>
+        <div className="wrap banner__inner">
+          <h2 id="membership" className="display display--l" data-reveal>
+            You don’t need motivation. <span className="display--italic">You need recalibration.</span>
+          </h2>
+          <p className="lede lede--wide" data-reveal>
+            The daily system that built this brand and this being. Body. Sound. Attention. Four chambers, used together,
+            used daily.
+          </p>
+          <div className="actions" data-reveal>
+            <Link href="/membership" className="btn" data-event="cta_click" data-label="Home, Membership">
+              See the membership
+            </Link>
+            <Link href="/breathwork-membership" className="link">What’s in the library</Link>
           </div>
         </div>
       </section>
@@ -225,15 +224,19 @@ export default function Home() {
         <div className="wrap stack stack--xl">
           <h2 id="more" className="visually-hidden">Books and music</h2>
           <div className="pairs">
-            <div className="stack" data-reveal>
+            <div className="stack stack--l" data-reveal>
+              <div className="product-shot">
+                <Image src={photos.book.src} alt={photos.book.alt} width={photos.book.width} height={photos.book.height} sizes="(max-width: 900px) 80vw, 24rem" />
+              </div>
               <h3 className="display display--m">Don’t Just Sit There!</h3>
               <p className="prose">
-                Forty-four laws of human experience, and how to live above them. Clear. Simple. Funny. Enlightenment for
-                the rest of us.
+                Forty-four insights to get your meditation practice off the cushion and into the real world. Clear.
+                Simple. Funny. Enlightenment for the rest of us.
               </p>
               <Link href="/shop" className="link">The book and the breathwork deck</Link>
             </div>
-            <div className="stack" data-reveal>
+            <div className="stack stack--l" data-reveal>
+              <Photo name="album" ratio="1" reveal={false} sizes="(max-width: 900px) 80vw, 24rem" className="product-shot" />
               <h3 className="display display--m">New album out now</h3>
               <p className="prose">
                 Biet scores her own meditations. Listen to the new record, her album The Lunar, and a set of free guided

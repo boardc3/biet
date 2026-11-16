@@ -22,6 +22,7 @@ export default function SourceSignup() {
           </>
         }
         lede="To join the next The Source experience, sign up here."
+        image="floorPlants"
       >
         <a className="btn" href={site.kajabi.sourceSignup} target="_blank" rel="noopener noreferrer" data-event="begin_checkout" data-label="Source signup, Join us">
           Join us

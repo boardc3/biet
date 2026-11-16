@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Aperture } from "@/components/Aperture";
+import Image from "next/image";
 import { JsonLd } from "@/components/JsonLd";
-import { Plate } from "@/components/Plate";
+import { Photo } from "@/components/Photo";
+import { photos, type PhotoName } from "@/content/images";
 import { site } from "@/content/site";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
-import type { MediaSlot } from "@/lib/media";
 
 export const metadata = pageMetadata({
   title: "Membership: The Daily Recalibration, $111 a Month",
@@ -14,11 +14,11 @@ export const metadata = pageMetadata({
   shareLine: "You need recalibration.",
 });
 
-const chambers: Array<{ name: string; slot: MediaSlot; lines: string[][] }> = [
-  { name: "The Body", slot: "membership-body", lines: [["Stop carrying tension all day.", "Stop reacting.", "Stop bracing."], ["Feel it.", "Clear it.", "Move on."]] },
-  { name: "The State", slot: "membership-state", lines: [["Shift your physiology in minutes."], ["Before the meeting.", "Before the ask.", "Before the room."], ["Control your state.", "Don’t let it control you."]] },
-  { name: "The Observer", slot: "membership-observer", lines: [["See your thoughts.", "Don’t obey them."], ["Stop over-explaining.", "Stop over-sharing."], ["Choose your response."], ["That’s power."]] },
-  { name: "The Installation", slot: "membership-installation", lines: [["Five minutes. Daily."], ["Install the version of you", "who already exists at the next level."], ["Not affirmations."], ["Positioning."]] },
+const chambers: Array<{ name: string; photo: PhotoName; lines: string[][] }> = [
+  { name: "The Body", photo: "flowers", lines: [["Stop carrying tension all day.", "Stop reacting.", "Stop bracing."], ["Feel it.", "Clear it.", "Move on."]] },
+  { name: "The State", photo: "knitSweater", lines: [["Shift your physiology in minutes."], ["Before the meeting.", "Before the ask.", "Before the room."], ["Control your state.", "Don’t let it control you."]] },
+  { name: "The Observer", photo: "profile", lines: [["See your thoughts.", "Don’t obey them."], ["Stop over-explaining.", "Stop over-sharing."], ["Choose your response."], ["That’s power."]] },
+  { name: "The Installation", photo: "planetarium", lines: [["Five minutes. Daily."], ["Install the version of you", "who already exists at the next level."], ["Not affirmations."], ["Positioning."]] },
 ];
 
 function Lines({ groups }: { groups: string[][] }) {
@@ -41,27 +41,27 @@ function Lines({ groups }: { groups: string[][] }) {
 export default function Membership() {
   return (
     <>
-      <section className="page-hero">
-        <div className="wrap page-hero__grid">
-          <div className="page-hero__text">
-            <p className="kicker">Guided by Biet. The Source, an ongoing installation.</p>
-            <h1 className="display display--xl">
-              You don’t need motivation. <span className="display--italic">You need recalibration.</span>
-            </h1>
-            <p className="lede lede--wide">
-              The daily system that built this brand and this being. For people who want more without burning out or
-              losing themselves in the process.
-            </p>
-            <div className="actions">
-              <a className="btn" href="#install" data-event="cta_click" data-label="Membership, hero Enter">Enter</a>
-              <Link className="link" href="/breathwork-membership">What’s in the library</Link>
-            </div>
+      <section className="banner banner--top">
+        <div className="banner__photo">
+          <Image src={photos.desertDusk.src} alt={photos.desertDusk.alt} fill priority sizes="100vw" style={{ objectPosition: photos.desertDusk.focus }} />
+        </div>
+        <div className="wrap banner__inner">
+          <p className="kicker">Guided by Biet. The Source, an ongoing installation.</p>
+          <h1 className="display display--xl">
+            You don’t need motivation. <span className="display--italic">You need recalibration.</span>
+          </h1>
+          <p className="lede lede--wide">
+            The daily system that built this brand and this being. For people who want more without burning out or
+            losing themselves in the process.
+          </p>
+          <div className="actions">
+            <a className="btn" href="#install" data-event="cta_click" data-label="Membership, hero Enter">Enter</a>
+            <Link className="link" href="/breathwork-membership">What’s in the library</Link>
           </div>
-          <Aperture size="mark" className="page-hero__mark" />
         </div>
       </section>
 
-      <section className="room room--flush-top" aria-labelledby="more">
+      <section className="room" aria-labelledby="more">
         <div className="wrap split split--even">
           <h2 id="more" className="display display--l" data-reveal>
             You want more. <span className="display--italic">Good.</span>
@@ -114,12 +114,11 @@ export default function Membership() {
           <div className="chambers chambers--row" data-reveal>
             {chambers.map((c) => (
               <article key={c.name} className="chamber">
-                <span className="chamber__light" aria-hidden="true" />
+                <Photo name={c.photo} ratio="4 / 5" reveal={false} sizes="(max-width: 740px) 90vw, (max-width: 1200px) 45vw, 22vw" />
                 <h3 className="chamber__title">{c.name}</h3>
                 <div className="verse verse--small">
                   <Lines groups={c.lines} />
                 </div>
-                <Plate slot={c.slot} alt={`${c.name}, from the membership`} shape="soft" ratio="4 / 5" sizes="(max-width: 740px) 90vw, 25vw" />
               </article>
             ))}
           </div>
@@ -174,11 +173,14 @@ export default function Membership() {
             </a>
             <p className="note">Checkout opens on Kajabi, where the membership lives.</p>
           </div>
+          <div className="stack stack--l">
+            <Photo name="eyesClosed" shape="arch" ratio="1" sizes="(max-width: 900px) 92vw, 40vw" />
           <ul className="checks" data-reveal>
             <li>If this helps you make one better decision a week, it pays for itself.</li>
             <li>If it helps you stop leaking energy daily, it multiplies.</li>
             <li>Private clients pay six figures for this level of recalibration.</li>
           </ul>
+          </div>
         </div>
       </section>
 

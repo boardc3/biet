@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import { photos, type PhotoName } from "@/content/images";
 import { track } from "./track";
 
 type Props = {
@@ -10,13 +12,15 @@ type Props = {
   /** Short line shown on the card before the film loads. */
   caption?: string;
   tone?: "dawn" | "dusk";
+  /** A photograph of Biet shown behind the play button. */
+  poster?: PhotoName;
 };
 
 /**
  * Nothing from Vimeo or YouTube loads until the visitor asks for it. That keeps
  * pages fast and keeps third-party cookies off until someone presses play.
  */
-export function Video({ provider, id, title, caption, tone = "dawn" }: Props) {
+export function Video({ provider, id, title, caption, tone = "dawn", poster }: Props) {
   const [playing, setPlaying] = useState(false);
   const src =
     provider === "vimeo"
@@ -42,7 +46,13 @@ export function Video({ provider, id, title, caption, tone = "dawn" }: Props) {
             track("video_play", { title });
           }}
         >
-          <span className="video__glow" aria-hidden="true" />
+          {poster ? (
+            <span className="video__photo" aria-hidden="true">
+              <Image src={photos[poster].src} alt="" fill sizes="(max-width: 900px) 100vw, 80vw" style={{ objectPosition: photos[poster].focus }} />
+            </span>
+          ) : (
+            <span className="video__glow" aria-hidden="true" />
+          )}
           <span className="video__play" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg>
           </span>

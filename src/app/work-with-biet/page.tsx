@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
-import { Plate, hasPlate } from "@/components/Plate";
+import { LogoRow } from "@/components/Logos";
+import { Photo } from "@/components/Photo";
 import { site } from "@/content/site";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
 
@@ -42,10 +43,9 @@ const offerings = [
   },
 ];
 
-const rooms = ["The Sundance Film Festival", "MoMA", "1 Hotels", "Soho House", "SoulCycle", "lululemon", "sweetgreen"];
+const rooms = ["MoMA", "1 Hotels", "Soho House", "The William Vale", "SoulCycle", "lululemon", "sweetgreen"];
 
 export default function Work() {
-  const portrait = hasPlate("work-portrait");
   return (
     <>
       <PageHero
@@ -55,6 +55,7 @@ export default function Work() {
           </>
         }
         lede="Thirty years of study in ancient spiritual wisdom, brought to private clients, stages, hotels and brands."
+        image="airPlant"
       >
         <a className="btn" href={`mailto:${site.email}`} data-event="cta_click" data-label="Work, contact">
           Contact Biet
@@ -62,17 +63,14 @@ export default function Work() {
       </PageHero>
 
       <section className="room room--flush-top" aria-labelledby="offerings">
-        <div className={`wrap split${portrait ? " split--even" : ""}`}>
-          {portrait ? (
-            <div className="split__sticky">
-              <Plate slot="work-portrait" alt="Biet Simkin" shape="arch" />
-            </div>
-          ) : (
+        <div className="wrap split split--even">
+          <div className="split__sticky stack">
             <h2 id="offerings" className="kicker">What she offers</h2>
-          )}
+            <Photo name="yogaMat" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 45vw" />
+          </div>
           <div className="offerings">
             {offerings.map((o) => (
-              <div key={o.title} className="offering" data-reveal style={portrait ? { gridTemplateColumns: "1fr" } : undefined}>
+              <div key={o.title} className="offering" data-reveal style={{ gridTemplateColumns: "1fr" }}>
                 <h3 className="offering__title">{o.title}</h3>
                 <div className="stack">
                   <p className="offering__text">{o.text}</p>
@@ -87,11 +85,10 @@ export default function Work() {
       <section className="room room--mist" aria-labelledby="rooms">
         <div className="wrap split">
           <h2 id="rooms" className="kicker">Rooms she has held</h2>
-          <ul className="masthead" data-reveal>
-            {rooms.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
+          <div className="stack stack--l">
+            <LogoRow names={rooms} label="Venues and partners" />
+            <p className="note">And the Sundance Film Festival, where Biet has been the resident meditation guide.</p>
+          </div>
         </div>
       </section>
 

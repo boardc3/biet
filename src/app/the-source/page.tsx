@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
-import { Plate, hasPlate } from "@/components/Plate";
+import { LogoRow } from "@/components/Logos";
+import { Photo } from "@/components/Photo";
 import { Quotes } from "@/components/Quotes";
 import { shortVoices, site } from "@/content/site";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
@@ -40,7 +41,6 @@ const featured = ["Forbes", "ELLE", "Harper’s Bazaar", "TIME", "The Times", "O
 const quotes = ["williamson", "bush", "brand", "hemingway", "middleton", "chamberlin", "agrawal", "bond", "twena"].map((k) => shortVoices[k]);
 
 export default function TheSource() {
-  const portrait = hasPlate("source-portrait");
   return (
     <>
       <PageHero
@@ -51,6 +51,8 @@ export default function TheSource() {
           </>
         }
         lede="A space where people like you (visionaries, creators, leaders) gather to do the inner work that success alone can’t solve."
+        image="military"
+        imageFocus="58% 12%"
       >
         <a className="btn" href={dm} target="_blank" rel="noopener noreferrer" data-event="cta_click" data-label="Source, hero DM">
           Message me on Instagram to connect
@@ -133,7 +135,7 @@ export default function TheSource() {
         <div className="wrap split">
           <div className="stack">
             <h2 id="included" className="display display--m">Create wealth. Build intimacy. Live alignment.</h2>
-            <Plate slot="source-circle" alt="A Guided by Biet gathering" ratio="3 / 2" />
+            <Photo name="floorPlants" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 30vw" />
           </div>
           <div className="stack stack--l">
             <ul className="checks" data-reveal>
@@ -171,9 +173,10 @@ export default function TheSource() {
       </section>
 
       <section className="room" aria-labelledby="easy">
-        <div className={`wrap split${portrait ? " split--even split--center" : ""}`}>
-          {portrait ? <Plate slot="source-portrait" alt="Biet Simkin" shape="arch" /> : <p className="kicker">I want you to know one thing</p>}
+        <div className="wrap split split--even split--center">
+          <Photo name="leatherSofa" shape="arch" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 45vw" />
           <div className="stack stack--l">
+            <p className="kicker">I want you to know one thing</p>
             <h2 id="easy" className="display display--l" data-reveal>
               It can be <span className="display--italic">easy.</span>
             </h2>
@@ -245,7 +248,10 @@ export default function TheSource() {
 
       <section className="room" aria-labelledby="why">
         <div className="wrap split">
-          <h2 id="why" className="display display--m">About Biet Simkin, and why she created The Source</h2>
+          <div className="stack stack--l">
+            <h2 id="why" className="display display--m">About Biet Simkin, and why she created The Source</h2>
+            <Photo name="bwLace" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 30vw" />
+          </div>
           <div className="prose" data-reveal>
             <p>
               Biet Simkin is a best-selling author, spiritual teacher, and artist known for creating immersive,
@@ -278,11 +284,7 @@ export default function TheSource() {
             <p className="note">Guided by Biet breathwork as seen on The Tonight Show.</p>
             <Link className="link" href="/press">Read the press</Link>
           </div>
-          <ul className="masthead" style={{ fontSize: "var(--step-2)" }} data-reveal>
-            {featured.map((f) => (
-              <li key={f}>{f}</li>
-            ))}
-          </ul>
+          <LogoRow names={featured} label="Press and partners" scale={0.85} />
         </div>
       </section>
 

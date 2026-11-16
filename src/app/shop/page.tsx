@@ -1,6 +1,7 @@
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
-import { Plate, hasPlate } from "@/components/Plate";
+import Image from "next/image";
+import { photos } from "@/content/images";
 import { Quotes } from "@/components/Quotes";
 import { site, voices } from "@/content/site";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
@@ -64,18 +65,9 @@ export default function Shop() {
             </div>
           </div>
           <div className="split__sticky" data-reveal>
-            {hasPlate("book-cover") ? (
-              <Plate slot="book-cover" alt="Cover of Don’t Just Sit There! by Biet Simkin" ratio="2 / 3" sizes="(max-width: 900px) 70vw, 30vw" />
-            ) : (
-              <div className="book" aria-hidden="true">
-                <span className="book__title">Don’t Just Sit There!</span>
-                <span className="book__meta">
-                  Biet Simkin
-                  <br />
-                  Simon &amp; Schuster
-                </span>
-              </div>
-            )}
+            <div className="product-shot">
+              <Image src={photos.book.src} alt={photos.book.alt} width={photos.book.width} height={photos.book.height} priority sizes="(max-width: 900px) 80vw, 24rem" />
+            </div>
           </div>
         </div>
       </section>
@@ -110,18 +102,9 @@ export default function Shop() {
             </div>
           </div>
           <div className="split__sticky" data-reveal>
-            {hasPlate("deck-cover") ? (
-              <Plate slot="deck-cover" alt="Breathwork: Guided by Biet card deck" ratio="3 / 4" sizes="(max-width: 900px) 70vw, 30vw" />
-            ) : (
-              <div className="book book--deck" aria-hidden="true">
-                <span className="book__title">Breathwork</span>
-                <span className="book__meta">
-                  Guided by Biet
-                  <br />
-                  30 breathing practices
-                </span>
-              </div>
-            )}
+            <div className="product-shot">
+              <Image src={photos.deck.src} alt={photos.deck.alt} width={photos.deck.width} height={photos.deck.height} sizes="(max-width: 900px) 80vw, 24rem" style={{ borderRadius: "0.75rem" }} />
+            </div>
           </div>
         </div>
       </section>

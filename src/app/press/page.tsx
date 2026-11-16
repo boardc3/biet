@@ -1,4 +1,6 @@
 import { JsonLd } from "@/components/JsonLd";
+import { Logo } from "@/components/Logos";
+import { Photo } from "@/components/Photo";
 import { PageHero } from "@/components/PageHero";
 import { PressList } from "@/components/PressList";
 import { press, site } from "@/content/site";
@@ -22,6 +24,8 @@ export default function Press() {
           </>
         }
         lede="Featured in Vogue, Forbes, ELLE and TIME. Guided by Biet breathwork as seen on The Tonight Show."
+        image="marbleWall"
+        imageFocus="50% 66%"
       >
         <a className="btn btn--ghost" href={`mailto:${site.email}?subject=Press%20inquiry`} data-event="cta_click" data-label="Press, inquiry">
           Press inquiries
@@ -31,6 +35,27 @@ export default function Press() {
       <section className="room room--flush-top" aria-label="Articles">
         <div className="wrap" data-reveal>
           <PressList items={press} />
+        </div>
+      </section>
+
+      <section className="room room--dusk" aria-labelledby="tonight">
+        <div className="wrap split split--even split--center">
+          <div className="stack stack--l">
+            <Logo name="The Tonight Show" />
+            <h2 id="tonight" className="display display--l">As seen on The Tonight Show.</h2>
+            <p className="lede">
+              Guided by Biet breathwork, the signature four-minute practice Jimmy Fallon tried on air.
+            </p>
+          </div>
+          <Photo name="redBackdrop" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 42vw" />
+        </div>
+      </section>
+
+      <section className="room" aria-label="More photographs">
+        <div className="wrap trio-photos">
+          <Photo name="cube" ratio="4 / 5" sizes="(max-width: 700px) 92vw, 30vw" />
+          <Photo name="silverDress" ratio="4 / 5" sizes="(max-width: 700px) 92vw, 30vw" />
+          <Photo name="onStage" ratio="4 / 5" sizes="(max-width: 700px) 92vw, 30vw" />
         </div>
       </section>
 

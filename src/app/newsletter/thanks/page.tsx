@@ -19,6 +19,7 @@ export default function Thanks() {
         </>
       }
       lede="Thank you for joining. We promise we won’t bug ya."
+      image="armsOpen"
     >
       <Link className="btn" href="/">Back to the beginning</Link>
       <Link className="link" href="/music">Listen while you wait</Link>

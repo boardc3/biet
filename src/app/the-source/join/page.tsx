@@ -61,6 +61,7 @@ export default function Join() {
           </>
         }
         lede="The kind of spiritual practice that is practical and lends itself to a big life with big events, career, family, travel, sex and results."
+        image="cube"
       >
         <a className="btn" href="#investment" data-event="cta_click" data-label="Join, hero">Join here</a>
         <Link className="link" href="/the-source">About The Source</Link>

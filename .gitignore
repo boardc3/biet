@@ -6,3 +6,8 @@ out
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+
+# Untouched originals. Web-sized copies live in public/media.
+asset-library
+public/assets
+AGENTS.md

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
-import { Plate, hasPlate } from "@/components/Plate";
+import { Photo } from "@/components/Photo";
 import { Video } from "@/components/Video";
 import { Voices } from "@/components/Voices";
 import { site, voices } from "@/content/site";
@@ -16,7 +16,6 @@ export const metadata = pageMetadata({
 });
 
 export default function About() {
-  const portrait = hasPlate("about-portrait");
   return (
     <>
       <PageHero
@@ -26,17 +25,14 @@ export default function About() {
           </>
         }
         lede="Biet Simkin is a world-renowned spiritual teacher and best-selling author. As a musician, she weaves the world of pop culture and spirituality."
+        image="bwLace"
       />
 
       <section id="about" className="room room--flush-top" aria-label="Biography">
-        <div className={`wrap split${portrait ? " split--even" : ""}`}>
-          {portrait ? (
-            <div className="split__sticky">
-              <Plate slot="about-portrait" alt="Portrait of Biet Simkin" shape="arch" priority />
-            </div>
-          ) : (
-            <h2 className="kicker">Her story</h2>
-          )}
+        <div className="wrap split split--even">
+          <div className="split__sticky">
+            <Photo name="armsOpen" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 45vw" />
+          </div>
           <div className="stack stack--l">
             <p className="statement statement--wide" data-reveal>
               Biet is the world-renowned Spiritual Teacher and Best-Selling Author, dubbed the “David Bowie of
@@ -72,7 +68,6 @@ export default function About() {
               </a>
               <Link className="link" href="/work-with-biet">Work with Biet</Link>
             </div>
-            <Plate slot="about-second" alt="Biet Simkin" ratio="3 / 2" />
           </div>
         </div>
       </section>
@@ -85,7 +80,7 @@ export default function About() {
               A short film with Biet.
             </p>
           </div>
-          <Video provider="vimeo" id="322690377" title="On resilience" caption="Play the film, 6 min 49 s" />
+          <Video provider="vimeo" id="322690377" title="On resilience" caption="Play the film, 6 min 49 s" poster="armchair" />
         </div>
       </section>
 

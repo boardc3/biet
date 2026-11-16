@@ -2,7 +2,9 @@ import Link from "next/link";
 import { Cross } from "@/components/Cross";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
-import { Plate, hasPlate } from "@/components/Plate";
+import Image from "next/image";
+import { Photo } from "@/components/Photo";
+import { photos } from "@/content/images";
 import { Quotes } from "@/components/Quotes";
 import { shortVoices, site } from "@/content/site";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
@@ -34,7 +36,6 @@ const first = ["hemingway", "middleton", "twena"].map((k) => shortVoices[k]);
 const second = ["brand", "agrawal", "martin", "stewart", "clarke"].map((k) => shortVoices[k]);
 
 export default function Library() {
-  const portrait = hasPlate("library-portrait");
   return (
     <>
       <PageHero
@@ -45,6 +46,7 @@ export default function Library() {
           </>
         }
         lede="This is an ongoing installation. Recorded pieces."
+        image="eyesClosed"
       >
         <a className="btn" href={site.kajabi.membershipOffer} target="_blank" rel="noopener noreferrer" data-event="begin_checkout" data-label="Library, hero Enter">
           Enter
@@ -82,7 +84,7 @@ export default function Library() {
 
       <section className="room room--mist" aria-labelledby="welcome">
         <div className="wrap split split--even split--center">
-          {portrait ? <Plate slot="library-portrait" alt="Biet Simkin" shape="arch" /> : <Cross />}
+          <Cross />
           <div className="stack stack--l">
             <h2 id="welcome" className="display display--m" data-reveal>
               Welcome to the Guided by Biet breathwork online membership
@@ -136,10 +138,13 @@ export default function Library() {
 
       <section className="room" aria-labelledby="how">
         <div className="wrap split">
-          <h2 id="how" className="display display--m">
-            Have you ever wondered how someone like me got up after massive shock and tragedy, seemingly dusted it off
-            and now has it all?
-          </h2>
+          <div className="stack stack--l">
+            <h2 id="how" className="display display--m">
+              Have you ever wondered how someone like me got up after massive shock and tragedy, seemingly dusted it off
+              and now has it all?
+            </h2>
+            <Photo name="bwLace" ratio="4 / 5" sizes="(max-width: 900px) 92vw, 30vw" />
+          </div>
           <div className="stack stack--l">
             <div className="prose" data-reveal>
               <p>
@@ -175,6 +180,11 @@ export default function Library() {
               <p className="display display--s display--italic" data-reveal>Let me show you how.</p>
             </div>
           </div>
+          <div className="trio-photos">
+            <Photo name="airPlant" ratio="4 / 5" sizes="(max-width: 700px) 92vw, 30vw" />
+            <Photo name="marbleWall" ratio="4 / 5" focus="50% 66%" sizes="(max-width: 700px) 92vw, 30vw" />
+            <Photo name="cube" ratio="4 / 5" sizes="(max-width: 700px) 92vw, 30vw" />
+          </div>
           <div className="offerings">
             {inside.map(([title, sub, text]) => (
               <div key={title} className="offering" data-reveal>
@@ -192,6 +202,7 @@ export default function Library() {
       <section className="room" aria-labelledby="want">
         <div className="wrap split split--even split--center">
           <div className="stack stack--l">
+            <Photo name="armsOpen" ratio="3 / 2" sizes="(max-width: 900px) 92vw, 45vw" />
             <p className="kicker">I want this for you.</p>
             <div className="verse" data-reveal>
               <p>A full juicy life that has all its dimensions restored.</p>
@@ -210,21 +221,22 @@ export default function Library() {
         </div>
       </section>
 
-      <section className="room room--mist" aria-labelledby="meditation">
-        <div className="wrap split">
-          <h2 id="meditation" className="display display--m">And who can’t use more meditation! Right?</h2>
-          <div className="prose" data-reveal>
-            <p>
-              But my system is unique and fresh. It doesn’t just have you sit on a pillow pretending to be calm. I give
-              you concrete tools that use your body, senses and visualization to create a new kind of meditation!
-            </p>
-            <p>
-              I have compiled meditation practices for people who are on the go, like me. People who overthink, like me!
-              People who get upset sometimes and feel disappointment sometimes! Like me! These ancient practices, which
-              I have curated and shifted to a place where they’ve healed me from the gates of hell, I now share them all
-              with you here!
-            </p>
-          </div>
+      <section className="banner" aria-labelledby="meditation">
+        <div className="banner__photo">
+          <Image src={photos.armchair.src} alt={photos.armchair.alt} fill sizes="100vw" style={{ objectPosition: photos.armchair.focus }} />
+        </div>
+        <div className="wrap banner__inner">
+          <h2 id="meditation" className="display display--l">And who can’t use more meditation! Right?</h2>
+          <p className="lede lede--wide">
+            But my system is unique and fresh. It doesn’t just have you sit on a pillow pretending to be calm. I give
+            you concrete tools that use your body, senses and visualization to create a new kind of meditation!
+          </p>
+          <p className="lede lede--wide">
+            I have compiled meditation practices for people who are on the go, like me. People who overthink, like me!
+            People who get upset sometimes and feel disappointment sometimes! Like me! These ancient practices, which I
+            have curated and shifted to a place where they’ve healed me from the gates of hell, I now share them all
+            with you here!
+          </p>
         </div>
       </section>
 

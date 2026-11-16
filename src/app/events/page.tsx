@@ -2,6 +2,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { NewsletterButton } from "@/components/Newsletter";
 import { PageHero } from "@/components/PageHero";
+import { Photo } from "@/components/Photo";
 import { site } from "@/content/site";
 import { breadcrumbs, pageMetadata } from "@/lib/seo";
 
@@ -23,12 +24,22 @@ export default function Events() {
           </>
         }
         lede="No public dates are listed right now. The newsletter is where Guided by Biet events are announced."
+        image="tent"
       >
         <NewsletterButton source="events">Join my newsletter</NewsletterButton>
         <a className="link" href={site.instagram.house.url} target="_blank" rel="noopener noreferrer">
           Follow {site.instagram.house.handle}
         </a>
       </PageHero>
+
+      <section className="room room--flush-top" aria-label="Past events">
+        <div className="wrap mosaic">
+          <Photo name="moma" ratio="3 / 2" className="mosaic__wide" sizes="(max-width: 830px) 92vw, 60vw" caption="Guided by Biet at MoMA" />
+          <Photo name="planetarium" ratio="3 / 4" sizes="(max-width: 830px) 46vw, 30vw" />
+          <Photo name="armsRaised" ratio="3 / 4" sizes="(max-width: 830px) 46vw, 30vw" />
+          <Photo name="whiteDress" ratio="3 / 2" className="mosaic__wide" sizes="(max-width: 830px) 92vw, 60vw" />
+        </div>
+      </section>
 
       <section className="room room--mist" aria-labelledby="private-events">
         <div className="wrap split">
